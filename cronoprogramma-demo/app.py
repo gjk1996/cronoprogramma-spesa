@@ -1,4 +1,23 @@
 import streamlit as st
+
+APP_PASSWORD = st.secrets["APP_PASSWORD"]
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.title("🔒 Accesso riservato")
+
+    pwd = st.text_input("Inserisci password", type="password")
+
+    if pwd == APP_PASSWORD:
+        st.session_state.authenticated = True
+        st.experimental_rerun()
+    else:
+        st.stop()
+
+
+import streamlit as st
 import pandas as pd
 from decimal import Decimal, ROUND_HALF_UP
 from io import BytesIO
@@ -225,3 +244,4 @@ with col2:
     st.line_chart(
         df_mesi.set_index("Mese progressivo")["Costo atteso mensile (€)"]
     )
+
