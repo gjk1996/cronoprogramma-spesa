@@ -12,7 +12,7 @@ if not st.session_state.authenticated:
 
     if pwd == APP_PASSWORD:
         st.session_state.authenticated = True
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.stop()
 
@@ -244,4 +244,5 @@ with col2:
     st.line_chart(
         df_mesi.set_index("Mese progressivo")["Costo atteso mensile (€)"]
     )
+
 
